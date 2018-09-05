@@ -1,3 +1,29 @@
+# Why This Fork?
+This is a fork of CNCjs in order to be able to adjust the workspace settings. It was made especially for the CoMakingSpace.
+The changes compared to master are:
+1. The implementation of pull request 380
+2. Changes in src/web/store/defaultState.js in order to have modified default workspace settings. This is related to [Issue 57](https://github.com/comakingspace/do-something/issues/57) of the CoMakingSpace.
+
+This fork will not be needed anymore once [Issue 359](https://github.com/cncjs/cncjs/issues/359) of CNCjs got implemented.
+
+In order to build it, please do the followin:
+```
+git clone https://github.com/comakingspace/cncjs
+cd cncjs
+npm install
+npm run build
+```
+Please make sure to let npm finish all tasks without you pressing a button.
+
+Afterwards you can use ./bin/cnc in order to run it.
+This was tested using Ubuntu on WSL, with the following versions of node and nppm:
+```
+node -v && npm -v
+v8.11.4
+5.6.0
+```
+
+
 # CNCjs [![Travis CI Build Status](https://travis-ci.org/cncjs/cncjs.svg)](https://travis-ci.org/cncjs/cncjs) [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/qxx53wq32w3edule?svg=true)](https://ci.appveyor.com/project/cheton/cncjs) [![Coverage Status](https://coveralls.io/repos/github/cncjs/cncjs/badge.svg?branch=master)](https://coveralls.io/github/cncjs/cncjs?branch=master)
 
 [![NPM](https://nodei.co/npm/cncjs.png?downloads=true&stars=true)](https://www.npmjs.com/package/cncjs)

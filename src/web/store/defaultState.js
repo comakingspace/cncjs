@@ -16,13 +16,13 @@ const defaultState = {
             primary: {
                 show: true,
                 widgets: [
-                    'connection', 'console', 'grbl', 'marlin', 'smoothie', 'tinyg', 'webcam'
+                    'connection', 'console', 'webcam'
                 ]
             },
             secondary: {
                 show: true,
                 widgets: [
-                    'axes', 'gcode', 'macro', 'probe', 'spindle', 'laser'
+                    'axes', 'gcode', 'macro'
                 ]
             }
         }
@@ -53,7 +53,7 @@ const defaultState = {
             controller: {
                 type: 'Grbl' // Grbl|Marlin|Smoothie|TinyG
             },
-            port: '', // will be deprecated in v2
+            port: '/dev/ttyUSB0', // will be deprecated in v2
             baudrate: 115200, // will be deprecated in v2
             connection: {
                 type: 'serial',
@@ -196,18 +196,18 @@ const defaultState = {
             }
         },
         webcam: {
-            disabled: true,
+            disabled: false,
             minimized: false,
 
             // local - Use a built-in camera or a connected webcam
             // mjpeg - M-JPEG stream over HTTP
-            mediaSource: 'local',
+            mediaSource: 'mjpeg',
 
             // The device id
             deviceId: '',
 
             // The URL field is required for the M-JPEG stream
-            url: '',
+            url: 'http://comakingcnc:8888/?action=stream',
 
             geometry: {
                 scale: 1.0,

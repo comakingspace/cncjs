@@ -6,7 +6,7 @@ The changes compared to master are:
 
 This fork will not be needed anymore once [Issue 359](https://github.com/cncjs/cncjs/issues/359) of CNCjs got implemented.
 
-In order to build it, please do the following:
+First, get the repository and navigate into it:
 ```
 git clone https://github.com/comakingspace/cncjs
 cd cncjs
@@ -15,6 +15,8 @@ If you are on a raspberry pi, you now have to install serialport:
 ```
 sudo npm install serialport --unsafe-perm --build-from-source
 ```
+In addition, please increase the swapfile:
+Edit /etc/dphys-swapfile and set CONF_SWAPSIZE=1024
 
 Now, please run the following:
 ```

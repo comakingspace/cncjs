@@ -6,32 +6,50 @@ The changes compared to master are:
 
 This fork will not be needed anymore once [Issue 359](https://github.com/cncjs/cncjs/issues/359) of CNCjs got implemented.
 
-First, get the repository and navigate into it:
-```
-git clone https://github.com/comakingspace/cncjs
-cd cncjs
-```
-If you are on a raspberry pi, you now have to install serialport:
-```
-sudo npm install serialport --unsafe-perm --build-from-source
-```
-In addition, please increase the swapfile:
-Edit /etc/dphys-swapfile and set CONF_SWAPSIZE=1024
-
-Now, please run the following:
-```
-npm install
-npm run build
-```
-Please make sure to let npm finish all tasks without you pressing a button.
-
-Afterwards you can use ./bin/cnc in order to run it.
-This was tested using Ubuntu on WSL, with the following versions of node and nppm:
+# Installation
+# Ubuntu on WSL
+I got it to build and run on Ubuntu using WSL with the following environment:
 ```
 node -v && npm -v
 v8.11.4
 5.6.0
 ```
+First, get the repository and navigate into it:
+```
+git clone https://github.com/comakingspace/cncjs
+cd cncjs
+npm install
+npm run build
+```
+
+# Raspberry Pi
+On a raspberry pi, things seem to be different. Here are the steps that worked on a pi 3 (tests on a pi 2 pending...):
+1. Install NodeJS using the following:
+```
+sudo apt-get -qq update
+wget https://raw.githubusercontent.com/sdesalas/node-pi-zero/master/install-node-v.lts.sh 
+chmod +x install-node-v.lts.sh 
+./install-node-v.lts.sh
+```
+2. Downgrade npm to 5.6.0:
+```
+npm install -g npm@5.6.0
+```
+Note: not sure if this step is really needed, but I wanted to have a system as close to the working ubuntu system as possible
+
+3. Enlarge the Swap File
+Edit /etc/dphys-swapfile and set CONF_SWAPSIZE=2048
+Note: It seems that 1024 was not enough swap space on the pi 3. On the pi 2, it might be a good idea to use even more swap since it has fewer memory.
+4. Install
+```
+npm install --build-from-source
+```
+Please make sure to let npm finish all tasks without you pressing a button.
+Note: Not sure if --build-from-source was really needed - but it seems to have worked.
+I did run another npm install and npm run prepare afterwards - but actually I do not think it was really needed.
+
+Afterwards you can use ./bin/cnc in order to run it.
+
 
 
 # CNCjs [![Travis CI Build Status](https://travis-ci.org/cncjs/cncjs.svg)](https://travis-ci.org/cncjs/cncjs) [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/qxx53wq32w3edule?svg=true)](https://ci.appveyor.com/project/cheton/cncjs) [![Coverage Status](https://coveralls.io/repos/github/cncjs/cncjs/badge.svg?branch=master)](https://coveralls.io/github/cncjs/cncjs?branch=master)

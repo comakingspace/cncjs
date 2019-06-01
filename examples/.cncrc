@@ -6,6 +6,12 @@
      }
   ],
   "baudrates": [115200, 250000],
+  "mountPoints": [
+    {
+      "route": "/widget",
+      "target": "https://cncjs.github.io/cncjs-widget-boilerplate/v1/"
+    }
+  ],
   "watchDirectory": "/path/to/dir",
   "accessTokenLifetime": "30d",
   "allowRemoteAccess": false,
@@ -16,11 +22,11 @@
   "commands": [
     {
       "title": "Update (root user)",
-      "commands": "sudo npm install -g cncjs@latest --unsafe-perm; pkill -a -f cnc"
+      "commands": "sudo npm install -g cncjs@latest --unsafe-perm; pkill -a -f cncjs"
     },
     {
       "title": "Update (non-root user)",
-      "commands": "npm install -g cncjs@latest; pkill -a -f cnc"
+      "commands": "npm install -g cncjs@latest; pkill -a -f cncjs"
     },
     {
       "title": "Reboot",

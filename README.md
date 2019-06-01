@@ -126,9 +126,8 @@ For a more complete introduction, see the [Introduction](https://github.com/cncj
  Version | Supported Level
 :------- |:---------------
  4       | Dropped support
- 6       | <b>Recommended for production use</b>
- 8       | <b>Recommended for production use</b>
- 9       | Supported
+ 6       | Supported
+ 8       | Supported
  10      | Supported
 
 ## Getting Started
@@ -152,8 +151,8 @@ export NVM_DIR="$HOME/.nvm"
 
 Once installed, you can select Node.js versions with:
 ```
-nvm install 6
-nvm use 6
+nvm install 10
+nvm use 10
 ```
 
 It's also recommended that you upgrade npm to the latest version. To upgrade, run:
@@ -219,6 +218,16 @@ pi@rpi3$ cncjs -h
 Instead of passing command line options for `--watch-directory`, `--access-token-lifetime`, `--allow-remote-access`, and `--controller`, you can create a `~/.cncrc` file that contains the following configuration in JSON format:
 ```json
 {
+    "mountPoints": [
+        {
+            "route": "/pendant",
+            "target": "/home/pi/tinyweb"
+        },
+        {
+            "route": "/widget",
+            "target": "https://cncjs.github.io/cncjs-widget-boilerplate/v1/"
+        }
+    ],
     "watchDirectory": "/path/to/dir",
     "accessTokenLifetime": "30d",
     "allowRemoteAccess": false,
@@ -260,6 +269,12 @@ See https://github.com/cncjs/cncjs/issues/242#issuecomment-352294549 for a detai
      }
   ],
   "baudrates": [115200, 250000],
+  "mountPoints": [
+    {
+      "route": "/widget",
+      "target": "https://cncjs.github.io/cncjs-widget-boilerplate/v1/"
+    }
+  ],
   "watchDirectory": "/path/to/dir",
   "accessTokenLifetime": "30d",
   "allowRemoteAccess": false,
@@ -339,6 +354,36 @@ Locale | Language | Status | Contributors
 If you would like to support this project, you can make a donation using PayPal. Thank you!
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=38CYN33CWPBR2)
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/cheton/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/cheton#backer)]
+
+<a href="https://opencollective.com/cheton#backers" target="_blank"><img src="https://opencollective.com/cheton/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/cheton#sponsor)]
+
+<a href="https://opencollective.com/cheton/sponsor/0/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/1/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/2/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/3/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/4/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/5/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/6/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/7/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/8/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/cheton/sponsor/9/website" target="_blank"><img src="https://opencollective.com/cheton/sponsor/9/avatar.svg"></a>
+
+
 
 ## License
 

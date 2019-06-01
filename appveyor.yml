@@ -13,7 +13,8 @@ init:
 
 environment:
   matrix:
-  - nodejs_version: "8"
+    - nodejs_version: "8"
+    - nodejs_version: "10"
   global:
     CI_BUILD_NUMBER: $(appveyor_build_number)
     GH_TOKEN:
@@ -51,6 +52,10 @@ install:
   - npm config set loglevel warn
   - npm install
 
+before_build:
+  - ps: $COMMIT_LOG = git log -1 --format='%ci %H %s'
+  - ps: echo "$COMMIT_LOG"
+
 build_script:
   - ps: |
       if ($env:APPVEYOR_REPO_TAG -eq 'false' -or $env:APPVEYOR_REPO_TAG -eq 'False') {
@@ -59,16 +64,17 @@ build_script:
       else {
         npm run build
       }
-  - ps: mkdir releases
-  - ps: $PRODUCT_NAME = "CNCjs"
   - ps: $PACKAGE_NAME = node -e "console.log(require('./src/package.json').name)"
   - ps: $PACKAGE_VERSION = node -e "console.log(require('./src/package.json').version)"
-  - ps: $COMMIT_LOG = git log -1 --format='%ci %H %s'
+  - ps: $PRODUCT_NAME = "CNCjs"
   - ps: $RELEASE = "${PACKAGE_NAME}-${PACKAGE_VERSION}"
+  - ps: echo "$PACKAGE_NAME"
+  - ps: echo "$PACKAGE_VERSION"
+  - ps: echo "$PRODUCT_NAME"
   - ps: echo "$RELEASE"
-  - ps: echo "$COMMIT_LOG"
+  - ps: mkdir releases
   - ps: |
-      if ($env:nodejs_version -eq '8' -And $env:platform -eq 'x64') {
+      if ($env:nodejs_version -eq '10' -And $env:platform -eq 'x64') {
         npm run build:win-x64
         Get-ChildItem output
         Copy-Item "output\${PRODUCT_NAME} Setup ${PACKAGE_VERSION}.exe" "releases\${RELEASE}-win-x64.exe"
@@ -80,7 +86,7 @@ build_script:
         }
       }
   - ps: |
-      if ($env:nodejs_version -eq '8' -And $env:platform -eq 'x64') {
+      if ($env:nodejs_version -eq '10' -And $env:platform -eq 'x64') {
         npm run build:win-ia32
         Get-ChildItem output
         Copy-Item "output\${PRODUCT_NAME} Setup ${PACKAGE_VERSION}.exe" "releases\${RELEASE}-win-ia32.exe"
@@ -110,4 +116,4 @@ deploy:
     prerelease: false
     on:
       appveyor_repo_tag: true  # deploy on tag push only
-      nodejs_version: "8"
+      nodejs_version: "10"

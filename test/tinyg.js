@@ -1,5 +1,5 @@
 import { test } from 'tap';
-import TinyGRunner from '../src/app/controllers/TinyG/TinyGRunner';
+import TinyGRunner from '../src/server/controllers/TinyG/TinyGRunner';
 
 test('TinyGParserResultMotorTimeout', (t) => {
     t.test('{"r":{"mt":2},"f":[1,0,8]}', (t) => {
@@ -91,6 +91,18 @@ test('TinyGParserResultStatusReports', (t) => {
         });
 
         const line = '{"sr":{"line":0,"vel":688.81,"mots":2,"dist":1,"posx":0.248,"posy":0.248,"mpox":0.248,"mpoy":0.248}}';
+        runner.parse(line);
+    });
+
+    // active tool number
+    t.test('{"sr":{"stat":4,"tool":3}}', (t) => {
+        const runner = new TinyGRunner();
+        runner.on('sr', ({ stat, tool }) => {
+            t.equal(tool, 3);
+            t.end();
+        });
+
+        const line = '{"sr":{"stat":4,"tool":3}}';
         runner.parse(line);
     });
 

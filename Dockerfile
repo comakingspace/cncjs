@@ -1,10 +1,13 @@
-FROM node:10
-MAINTAINER Cheton Wu <cheton@gmail.com>
+FROM --platform=linux/arm/v7 debian:stable-slim
 
-ADD package.json package.json
-RUN npm i npm@latest -g
-RUN npm install --production
+RUN apt-get update && \
+    apt-get install -y npm git
 
-ADD . .
+#RUN npm install -g npm@5.6.0
+
+RUN git clone https://github.com/comakingspace/cncjs
+WORKDIR cncjs
+RUN npm install --build-from-source
+
 EXPOSE 8000
-CMD ["bin/cncjs"]
+CMD bin/cnc

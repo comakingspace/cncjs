@@ -1,13 +1,9 @@
-FROM --platform=linux/arm/v7 debian:stable-slim
+FROM --platform=linux/arm/v7 node:10
 
-RUN apt-get update && \
-    apt-get install -y npm git
+ADD package.json package.json
 
-#RUN npm install -g npm@5.6.0
-
-RUN git clone https://github.com/comakingspace/cncjs
-WORKDIR cncjs
 RUN npm install --build-from-source
 
+ADD . .
 EXPOSE 8000
 CMD bin/cnc
